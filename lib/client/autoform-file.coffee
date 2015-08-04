@@ -25,6 +25,10 @@ Template.afFileUpload.onRendered ->
   $(self.firstNode).closest('form').on 'reset', ->
     self.value.set null
 
+Template.progressBar.helpers
+  progress: ->
+    return parseInt(Session.get('uploaderProgress') || 0)
+
 Template.afFileUpload.helpers
   label: ->
     @atts.label or 'Choose file'
@@ -48,20 +52,30 @@ Template.afFileUpload.events
   'click .js-select-file': (e, t) ->
     t.$('.js-file').click()
 
-  'change .js-file': (e, t) ->
-    collection = getCollection t.data
+  'click .js-remove': (e, t) ->
+    e.preventDefault()
+    t.value.set null
 
+  'change .js-file': (e, t) ->
     file = new FS.File e.target.files[0]
     if Meteor.userId
-      file.owner = Meteor.userId()
+      file.createdBy = Meteor.userId()
+
+    collection = getCollection t.data
+    #console.log([name, 'change .js-file', e.target, t, file, collection]);
+
+    #Session.set('uploaderProgress', 0)
 
     collection.insert file, (err, fileObj) ->
       if err then return console.log err
       t.value.set fileObj._id
 
-  'click .js-remove': (e, t) ->
-    e.preventDefault()
-    t.value.set null
+      # progress = setInterval(->
+      #   pct = fileObj.uploadProgress()
+      #   if (pct >= 100)
+      #     clearInterval(progress)
+      #   Session.set('uploaderProgress', pct)
+      # , 500)
 
 Template.afFileUploadThumbIcon.helpers
   icon: ->
