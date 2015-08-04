@@ -64,18 +64,18 @@ Template.afFileUpload.events
     collection = getCollection t.data
     #console.log([name, 'change .js-file', e.target, t, file, collection]);
 
-    #Session.set('uploaderProgress', 0)
+    Session.set('uploaderProgress', 0)
 
     collection.insert file, (err, fileObj) ->
       if err then return console.log err
       t.value.set fileObj._id
 
-      # progress = setInterval(->
-      #   pct = fileObj.uploadProgress()
-      #   if (pct >= 100)
-      #     clearInterval(progress)
-      #   Session.set('uploaderProgress', pct)
-      # , 500)
+      progress = setInterval(->
+        pct = fileObj.uploadProgress()
+        if (pct >= 100)
+          clearInterval(progress)
+        Session.set('uploaderProgress', pct)
+      , 250)
 
 Template.afFileUploadThumbIcon.helpers
   icon: ->

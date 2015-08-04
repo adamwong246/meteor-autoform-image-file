@@ -1,0 +1,29 @@
+template(name='afFileUpload')
+    div
+      if file
+        if file.isUploaded
+          +Template.dynamic template=previewTemplate data=file
+          div
+            a.js-remove(href='#')
+              i.fa.fa-times
+              |  {{removeLabel}}
+        else
+          span Uploading...
+          +progressBar
+      else
+        button.btn.btn-default.js-select-file(type='button') {{label}}
+        input.hidden.js-file(type='file' accept='{{atts.accept}}')
+      input.js-value(type='hidden' value='{{value}}' data-schema-key='{{schemaKey}}')
+        
+  template(name='afFileUploadThumbIcon')
+    a.btn.btn-default(target='_blank' href='{{url}}')
+      i.fa(class="fa-{{icon}}")
+      |  {{original.name}}
+      
+  template(name='afFileUploadThumbImg')
+    img.img-fileUpload-thumbnail.img-thumbnail.img-rounded(src='{{url}}' alt='')
+
+  template(name='progressBar')
+    .progress.progress-striped.active
+      .progress-bar(role='progressbar' aria-valuenow='' aria-valuemin='0' aria-valuemax='100' style='width: {{progress}}%;')
+        span.sr-only #{progress}% Complete
