@@ -48,13 +48,20 @@ Template.afFileUpload.helpers
   file: ->
     getDocument @
 
+setValue = (val, e, t) ->
+  t.value.set(val)
+  t.data.value = val
+  $form = $(t.firstNode).closest('form')[0]
+  $(t.find('.js-value')).keyup()
+  AutoForm.validateField($form.id, t.data.name, false)
+
 Template.afFileUpload.events
   'click .js-select-file': (e, t) ->
     t.$('.js-file').click()
 
   'click .js-remove': (e, t) ->
     e.preventDefault()
-    t.value.set null
+    setValue(undefined, e,t);
 
   'change .js-file': (e, t) ->
     file = new FS.File e.target.files[0]
@@ -68,8 +75,7 @@ Template.afFileUpload.events
 
     collection.insert file, (err, fileObj) ->
       if err then return console.log err
-      t.value.set fileObj._id
-
+      setValue(fileObj._id , e ,t);
       progress = setInterval(->
         pct = fileObj.uploadProgress()
         if (pct >= 100)
