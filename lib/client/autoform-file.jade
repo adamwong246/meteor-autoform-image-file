@@ -12,9 +12,11 @@ template(name='afFileUpload')
           +progressBar
       else
         button.btn.btn-default.js-select-file(type='button') {{label}}
+        button.btn.btn-default.js-camera-file(type='button') Or take a picture
+
         input.hidden.js-file(type='file' accept='{{atts.accept}}')
       input.js-value(type='hidden' value='{{value}}' data-schema-key='{{schemaKey}}')
-        
+
   template(name='afFileUploadThumbIcon')
     a.btn.btn-default(target='_blank' href='{{url}}')
       i.fa(class="fa-{{icon}}")
