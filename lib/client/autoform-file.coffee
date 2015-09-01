@@ -1,5 +1,5 @@
-AutoForm.addInputType 'fileUpload',
-  template: 'afFileUpload'
+AutoForm.addInputType 'imageFileUpload',
+  template: 'afImageFileUpload'
   valueOut: ->
     @val()
 
@@ -12,7 +12,7 @@ getDocument = (context) ->
   id = Template.instance()?.value?.get?()
   collection?.findOne(id)
 
-Template.afFileUpload.onCreated ->
+Template.afImageFileUpload.onCreated ->
   self = @
   @value = new ReactiveVar @data.value
 
@@ -20,16 +20,16 @@ Template.afFileUpload.onCreated ->
     _id = self.value.get()
     _id and Meteor.subscribe 'autoformFileDoc', self.data.atts.collection, _id
 
-Template.afFileUpload.onRendered ->
+Template.afImageFileUpload.onRendered ->
   self = @
   $(self.firstNode).closest('form').on 'reset', ->
     self.value.set null
 
-Template.progressBar.helpers
+Template.imageProgressBar.helpers
   progress: ->
     return parseInt(Session.get('uploaderProgress') || 0)
 
-Template.afFileUpload.helpers
+Template.afImageFileUpload.helpers
   label: ->
     @atts.label or 'Choose file'
   removeLabel: ->
@@ -42,9 +42,9 @@ Template.afFileUpload.helpers
   previewTemplate: ->
     doc = getDocument @
     if doc?.isImage()
-      'afFileUploadThumbImg'
+      'afImageFileUploadThumbImg'
     else
-      'afFileUploadThumbIcon'
+      'afImageFileUploadThumbIcon'
   file: ->
     getDocument @
 
@@ -55,7 +55,7 @@ setValue = (val, e, t) ->
   $(t.find('.js-value')).keyup()
   AutoForm.validateField($form.id, t.data.name, false)
 
-Template.afFileUpload.events
+Template.afImageFileUpload.events
   'click .js-select-file': (e, t) ->
     t.$('.js-file').click()
 
@@ -106,7 +106,7 @@ Template.afFileUpload.events
         Session.set('uploaderProgress', pct)
       , 250)
 
-Template.afFileUploadThumbIcon.helpers
+Template.afImageFileUploadThumbIcon.helpers
   icon: ->
     switch @extension()
       when 'pdf'

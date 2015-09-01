@@ -1,4 +1,4 @@
-template(name='afFileUpload')
+template(name='afImageFileUpload')
     div
       if file
         if file.isUploaded
@@ -17,15 +17,15 @@ template(name='afFileUpload')
         input.hidden.js-file(type='file' accept='{{atts.accept}}')
       input.js-value(type='hidden' value='{{value}}' data-schema-key='{{schemaKey}}')
 
-  template(name='afFileUploadThumbIcon')
+  template(name='afImageFileUploadThumbIcon')
     a.btn.btn-default(target='_blank' href='{{url}}')
       i.fa(class="fa-{{icon}}")
       |  {{original.name}}
       
-  template(name='afFileUploadThumbImg')
+  template(name='afImageFileUploadThumbImg')
     img.img-fileUpload-thumbnail.img-thumbnail.img-rounded(src='{{url}}' alt='')
 
-  template(name='progressBar')
+  template(name='imageProgressBar')
     .progress.progress-striped.active
       .progress-bar(role='progressbar' aria-valuenow='' aria-valuemin='0' aria-valuemax='100' style='width: {{progress}}%;')
         span.sr-only #{progress}% Complete

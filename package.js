@@ -1,5 +1,5 @@
 Package.describe({
-  name: "chroma:autoform-file",
+  name: "chroma:autoform-image-file",
   summary: "File upload for AutoForm",
   description: "File upload for AutoForm",
   version: "0.2.8",
