@@ -12,8 +12,8 @@ template(name='afImageFileUpload')
           +progressBar
       else
         button.btn.btn-default.js-select-file(type='button') {{label}}
-        button.btn.btn-default.js-camera-file(type='button') Or take a picture
-
+        if compatibleBrowser
+          button.btn.btn-default.js-camera-file(type='button') Or take a picture
         input.hidden.js-file(type='file' accept='{{atts.accept}}')
       input.js-value(type='hidden' value='{{value}}' data-schema-key='{{schemaKey}}')
 

@@ -30,6 +30,13 @@ Template.imageProgressBar.helpers
     return parseInt(Session.get('uploaderProgress') || 0)
 
 Template.afImageFileUpload.helpers
+  compatibleBrowser: ->
+    if BrowserDetect.browser == 'Safari' && BrowserDetect.OS == 'Mac'
+      return false
+    else if /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+      return false
+    else
+      return true
   label: ->
     @atts.label or 'Choose file'
   removeLabel: ->
