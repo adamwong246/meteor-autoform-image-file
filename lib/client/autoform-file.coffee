@@ -59,6 +59,29 @@ Template.afFileUpload.events
   'click .js-select-file': (e, t) ->
     t.$('.js-file').click()
 
+  'click .js-camera-file': (e, t) ->
+    MeteorCamera.getPicture({}, (err, data) ->
+
+      file = new FS.File data#e.target.files[0]
+      if Meteor.userId
+        file.createdBy = Meteor.userId()
+
+      collection = getCollection t.data
+
+      Session.set('uploaderProgress', 0)
+
+      collection.insert file, (err, fileObj) ->
+        if err then return console.log err
+        setValue(fileObj._id , e ,t);
+        progress = setInterval(->
+          pct = fileObj.uploadProgress()
+          if (pct >= 100)
+            clearInterval(progress)
+          Session.set('uploaderProgress', pct)
+        , 250)
+
+    )
+
   'click .js-remove': (e, t) ->
     e.preventDefault()
     setValue(undefined, e,t);
