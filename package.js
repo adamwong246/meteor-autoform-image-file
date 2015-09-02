@@ -18,7 +18,7 @@ Package.onUse(function(api) {
     'less',
     'aldeed:autoform@5.3.2',
     'fortawesome:fontawesome@4.3.0',
-    'mdg:camera',
+    "chroma:camera",
     'awatson1978:browser-detection'
   ]);
 
