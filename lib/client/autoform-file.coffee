@@ -18,7 +18,7 @@ Template.afImageFileUpload.onCreated ->
 
   @autorun ->
     _id = self.value.get()
-    _id and Meteor.subscribe 'autoformFileDoc', self.data.atts.collection, _id
+    _id and Meteor.subscribe 'autoformImageFileDoc', self.data.atts.collection, _id
 
 Template.afImageFileUpload.onRendered ->
   self = @

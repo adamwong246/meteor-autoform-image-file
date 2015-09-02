@@ -1,4 +1,4 @@
-Meteor.publish 'autoformFileDoc', (collectionName, docId) ->
+Meteor.publish 'autoformImageFileDoc', (collectionName, docId) ->
   check collectionName, String
   check docId, String
 
