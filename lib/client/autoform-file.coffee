@@ -24,6 +24,19 @@ Template.afImageFileUpload.onRendered ->
   self = @
   $(self.firstNode).closest('form').on 'reset', ->
     self.value.set null
+  Webcam.on 'error', (err) ->
+    console.log err
+    # outputs error to console instead of window.alert
+    return
+  Webcam.setSWFLocation("/packages/benjick_webcam/webcamjs/webcam.swf")
+  Webcam.set
+    width: 320
+    height: 240
+    dest_width: 640
+    dest_height: 480
+    image_format: 'jpeg'
+    jpeg_quality: 90
+  Webcam.attach '.webcam'
 
 Template.imageProgressBar.helpers
   progress: ->
@@ -67,9 +80,9 @@ Template.afImageFileUpload.events
     t.$('.js-file').click()
 
   'click .js-camera-file': (e, t) ->
-    MeteorCamera.getPicture({}, (err, data) ->
+    Webcam.snap (image) ->
 
-      file = new FS.File data#e.target.files[0]
+      file = new FS.File image
       if Meteor.userId
         file.createdBy = Meteor.userId()
 
@@ -86,8 +99,6 @@ Template.afImageFileUpload.events
             clearInterval(progress)
           Session.set('uploaderProgress', pct)
         , 250)
-
-    )
 
   'click .js-remove': (e, t) ->
     e.preventDefault()
