@@ -30,6 +30,8 @@ Template.imageProgressBar.helpers
     return parseInt(Session.get('uploaderProgress') || 0)
 
 Template.afImageFileUpload.helpers
+  cameraNativeBrowser: ->
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
   label: ->
     @atts.label or 'Choose file'
   removeLabel: ->
