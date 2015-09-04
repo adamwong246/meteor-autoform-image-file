@@ -34,6 +34,8 @@ Template.afImageFileUpload.helpers
     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
   label: ->
     @atts.label or 'Choose file'
+  cameraLabel: ->
+    @atts.cameraLabel or 'Take a picture'
   removeLabel: ->
     @atts.removeLabel or 'Remove'
   value: ->

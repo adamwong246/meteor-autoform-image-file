@@ -11,10 +11,14 @@ template(name='afImageFileUpload')
           span Uploading...
           +progressBar
       else
-        button.btn.btn-default.js-select-file(type='button') {{label}}
+
+        button.btn.js-select-file(type='button') {{label}}
         
         unless cameraNativeBrowser
-          button.btn.btn-default.js-camera-file(type='button') Or take a picture
+          br
+          |or
+          br
+          button.btn.js-camera-file(type='button') {{cameraLabel}}
 
         input.hidden.js-file(type='file' accept='{{atts.accept}}')
       input.js-value(type='hidden' value='{{value}}' data-schema-key='{{schemaKey}}')
