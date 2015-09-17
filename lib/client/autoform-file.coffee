@@ -81,6 +81,7 @@ Template.afImageFileUpload.events
           pct = fileObj.uploadProgress()
           if (pct >= 100)
             clearInterval(progress)
+            $(t.find('.js-value')).trigger('change')
           Session.set('uploaderProgress', pct)
         , 250)
 
@@ -107,6 +108,7 @@ Template.afImageFileUpload.events
         pct = fileObj.uploadProgress()
         if (pct >= 100)
           clearInterval(progress)
+          $(t.find('.js-value')).trigger('change')
         Session.set('uploaderProgress', pct)
       , 250)
 
