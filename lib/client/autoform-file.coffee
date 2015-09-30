@@ -64,7 +64,7 @@ Template.afImageFileUpload.events
     t.$('.js-file').click()
 
   'click .js-camera-file': (e, t) ->
-    MeteorCamera.getPicture({}, (err, data) ->
+    view = MeteorCamera.getPicture({collection: @atts.collection, schemaKey: @atts.name}, (err, data) ->
 
       file = new FS.File data#e.target.files[0]
       if Meteor.userId
