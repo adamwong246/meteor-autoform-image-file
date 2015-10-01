@@ -36,6 +36,8 @@ Template.afImageFileUpload.helpers
     @atts.label or 'Choose file'
   cameraLabel: ->
     @atts.cameraLabel or 'Take a picture'
+  mobileLabel: ->
+   @atts.mobileLabel or 'Add image'
   removeLabel: ->
     @atts.removeLabel or 'Remove'
   value: ->
