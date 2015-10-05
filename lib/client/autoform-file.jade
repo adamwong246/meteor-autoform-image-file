@@ -18,7 +18,7 @@ template(name='afImageFileUpload')
           br
           button.btn.js-camera-file(type='button') {{cameraLabel}}
         else
-          button.btn.js-camera-file(type='button') {{mobileLabel}}
+          button.btn.js-select-file(type='button') {{mobileLabel}}
 
         input.hidden.js-file(type='file' accept='{{atts.accept}}')
       input.js-value(type='hidden' value='{{value}}' data-schema-key='{{schemaKey}}')
