@@ -15,7 +15,7 @@ Package.onUse(function(api) {
     'reactive-var',
     'templating',
     'mquandalle:jade',
-    'less',
+    'less@2.0.0',
     'aldeed:autoform@5.3.2',
     'fortawesome:fontawesome@4.3.0',
     "chroma:camera",
