@@ -58,7 +58,7 @@ setValue = (val, e, t) ->
   t.value.set(val)
   t.data.value = val
   $form = $(t.firstNode).closest('form')[0]
-  $(t.find('.js-value')).keyup()
+  $(t.find('.js-value')).blur()
   AutoForm.validateField($form.id, t.data.name, false)
 
 Template.afImageFileUpload.events
